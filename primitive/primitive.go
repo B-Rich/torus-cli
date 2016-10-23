@@ -326,6 +326,37 @@ type OrgInvite struct { // type: 0x13
 	Approved     *time.Time    `json:"approved_at"`
 }
 
+// Machine is an entity that represents a machine object
+type Machine struct {
+	v1Schema
+	mutable
+	Name        string       `json:"name"`
+	OrgID       *identity.ID `json:"org_id"`
+	CreatedBy   *identity.ID `json:"created_by"`
+	Created     *time.Time   `json:"created_at"`
+	DestroyedBy *identity.ID `json:"destroyed_by"`
+	Destroyed   *time.Time   `json:"destroyed_at"`
+	State       string       `json:"state"`
+}
+
+// MachineToken is an portion of the MachineSegment object
+type MachineToken struct {
+	v1Schema
+	mutable
+	OrgID     *identity.ID `json:"org_id"`
+	MachineID *identity.ID `json:"machine_id"`
+	PublicKey *struct {
+		Alg   string        `json:"alg"`
+		Salt  *base64.Value `json:"salt"`
+		Value *base64.Value `json:"value"`
+	} `json:"public_key"`
+	CreatedBy   *identity.ID `json:"created_by"`
+	Created     *time.Time   `json:"created_at"`
+	DestroyedBy *identity.ID `json:"destroyed_by"`
+	Destroyed   *time.Time   `json:"destroyed_at"`
+	State       string       `json:"state"`
+}
+
 // Project is an entity that represents a group of services
 type Project struct { // type: 0x04
 	v1Schema
